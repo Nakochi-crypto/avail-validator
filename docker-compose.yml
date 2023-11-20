@@ -1,0 +1,46 @@
+services:
+  node:
+    image: "availj/avail:${TAG}"
+    restart: unless-stopped
+    volumes:
+      - da_state:/da/state
+      - da_keystore:/da/keystore
+    ports:
+      - "30333:30333"
+      - "30333:30333/udp"
+    command:
+      - --prometheus-external
+
+  node_exporter:
+    image: prom/node-exporter:latest
+    restart: unless-stopped
+    pid: host
+    volumes:
+      - /:/host:ro,rslave
+    command:
+      - --path.rootfs=/host
+
+  prometheus:
+    image: prom/prometheus:latest
+    restart: unless-stopped
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prometheus_data:/prometheus
+    ports:
+      - "${PROMETHEUS_PORT}:9090"
+
+  grafana:
+    image: grafana/grafana:latest
+    restart: unless-stopped
+    volumes:
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - grafana_data:/var/lib/grafana
+    ports:
+      - "${GRAFANA_PORT}:3000"
+
+volumes:
+  da_state:
+  da_keystore:
+  prometheus_data:
+  grafana_data:

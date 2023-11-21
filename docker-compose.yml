@@ -10,6 +10,8 @@ services:
       - "30333:30333/udp"
     command:
       - --prometheus-external
+    env_file:
+      - .env
 
   node_exporter:
     image: prom/node-exporter:latest

@@ -10,6 +10,7 @@
 
     ```
     git clone https://github.com/Nakochi-crypto/avail-validator.git
+    cd avail-validator
     ```
 
 2. Copy .env file

@@ -5,13 +5,15 @@ services:
     volumes:
       - da_state:/da/state
       - da_keystore:/da/keystore
+      - ./entrypoint.override.sh:/entrypoint.override.sh
     ports:
       - "30333:30333"
       - "30333:30333/udp"
-    command:
-      - --prometheus-external
+      - "${RPC_PORT}:9944"
     env_file:
       - .env
+    entrypoint:
+      - /entrypoint.override.sh
 
   node_exporter:
     image: prom/node-exporter:latest

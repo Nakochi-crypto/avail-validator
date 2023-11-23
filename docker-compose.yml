@@ -7,8 +7,8 @@ services:
       - da_keystore:/da/keystore
       - ./entrypoint.override.sh:/entrypoint.override.sh
     ports:
-      - "30333:30333"
-      - "30333:30333/udp"
+      - "${P2P_PORT}:30333"
+      - "${P2P_PORT}:30333/udp"
       - "${RPC_PORT}:9944"
     env_file:
       - .env

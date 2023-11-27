@@ -23,7 +23,6 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 12425,
   "graphTooltip": 0,
-  "id": 2,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -968,7 +967,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "none"
+              "mode": "percent"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -1117,7 +1116,7 @@
           "width": 250
         },
         "tooltip": {
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
         }
       },
@@ -1228,7 +1227,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "prometheus"
       },
       "description": "Basic memory usage",
       "fieldConfig": {
@@ -1263,7 +1262,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "none"
+              "mode": "normal"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -1589,6 +1588,13 @@
               {
                 "id": "custom.fillOpacity",
                 "value": 0
+              },
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": "false",
+                  "mode": "normal"
+                }
               }
             ]
           },
@@ -1638,6 +1644,13 @@
               {
                 "id": "custom.fillOpacity",
                 "value": 0
+              },
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": "false",
+                  "mode": "normal"
+                }
               }
             ]
           }
@@ -1660,7 +1673,7 @@
           "width": 350
         },
         "tooltip": {
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
         }
       },
@@ -1687,7 +1700,7 @@
             "uid": "Prometheus"
           },
           "exemplar": true,
-          "expr": "node_memory_MemTotal_bytes - node_memory_MemFree_bytes - (node_memory_Cached_bytes + node_memory_Buffers_bytes + node_memory_SReclaimable_bytes  )",
+          "expr": "node_memory_MemTotal_bytes - node_memory_MemFree_bytes - (node_memory_Cached_bytes + node_memory_Buffers_bytes + node_memory_SReclaimable_bytes)",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -1729,12 +1742,14 @@
             "type": "prometheus",
             "uid": "Prometheus"
           },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "(node_memory_SwapTotal_bytes - node_memory_SwapFree_bytes)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "SWAP Used",
+          "range": true,
           "refId": "E",
           "step": 240
         }
@@ -1823,7 +1838,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
         }
       },
@@ -1850,7 +1865,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "prometheus"
       },
       "description": "Basic network info per interface",
       "fieldConfig": {
@@ -2253,6 +2268,18 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*trans.*/"
+            },
+            "properties": [
+              {
+                "id": "custom.transform",
+                "value": "negative-Y"
+              }
+            ]
           }
         ]
       },
@@ -2272,7 +2299,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
         }
       },
@@ -2859,7 +2886,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "10.2.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -2953,7 +2980,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "10.2.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -3047,7 +3074,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "10.2.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -3141,7 +3168,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "10.2.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -3204,7 +3231,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3235,9 +3263,10 @@
           "values": false
         },
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
@@ -3295,7 +3324,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "10.2.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -3375,6 +3404,6 @@
   "timezone": "",
   "title": "Avail Metrics",
   "uid": "v6xjZah4z",
-  "version": 2,
+  "version": 1,
   "weekStart": ""
 }

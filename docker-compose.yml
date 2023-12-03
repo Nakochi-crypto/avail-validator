@@ -4,7 +4,6 @@ services:
     restart: unless-stopped
     volumes:
       - da_state:/da/state
-      - da_keystore:/da/keystore
       - ./entrypoint.override.sh:/entrypoint.override.sh
     ports:
       - "${P2P_PORT}:30333"
@@ -45,6 +44,5 @@ services:
 
 volumes:
   da_state:
-  da_keystore:
   prometheus_data:
   grafana_data:

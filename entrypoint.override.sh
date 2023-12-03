@@ -1,6 +1,14 @@
 #!/bin/bash
 
-ARGS=("--prometheus-external")
+ARGS=(
+  "-d"
+  "/da/state"
+  "--chain"
+  "$DA_CHAIN"
+  "--name"
+  "$DA_NAME"
+  "--prometheus-external"
+)
 
 if [[ "$ENABLE_VALIDATOR" = "true" ]]; then
   ARGS+=("--validator")
@@ -15,4 +23,4 @@ if [[ "$ENABLE_RPC" = "true" ]]; then
   )
 fi
 
-exec /entrypoint.sh "${ARGS[@]}"
+exec /usr/local/bin/data-avail "${ARGS[@]}"
